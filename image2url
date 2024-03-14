@@ -1,0 +1,11 @@
+#!/bin/bash
+#creating a bucket name 'ds2002-ybf3jw'
+#aws s3 mb s3://ds2002-ybf3jw
+# prompting the user for an url
+read -p 'Please give me a URL to an image: ' link
+curl $link > image.png
+#uploading the file to the bucket
+aws s3 cp image.png s3://ds2002-ybf3jw/
+#creating url
+#https://s3.amazonaws.com/ds2002-ybf3jw/image
+aws s3 presign --expires-in 604800 s3://ds2002-ybf3jw/image.png
